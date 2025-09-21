@@ -1,6 +1,6 @@
 import express from 'express';
 import path from 'path';
-import { __dirname } from '../utils/dirname.js';
+import { __dirname } from '../dirname.js';
 import * as loginModel from '../model/loginModel.js';
 
 const route = express.Router();

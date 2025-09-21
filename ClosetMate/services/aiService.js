@@ -31,8 +31,8 @@ app.post("/ask-ai", async (req, res) => {
         { // This is how you can enter user data for it to provide context to the AI model. We can use machine learning to be able to be able to provide the user preferences.
             role: "system",
             content: `
-            - User preference 1:
-            - User preference 2:
+            - Favorite Color: Insert data from database here,
+            - Favorite Style: Insert data from database here,
             - User preference 3:
             ...
             `

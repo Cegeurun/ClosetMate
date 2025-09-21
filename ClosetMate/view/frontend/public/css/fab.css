@@ -1,0 +1,107 @@
+/* Floating Action Button (FAB) - Themed Neumorphism */
+.fab-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+/* Main FAB */
+.fab-main {
+  width: 50px;
+  height: 50px;
+  background: var(--bg);
+  border-radius: 50%;
+  box-shadow:
+    8px 8px 16px var(--shadow-dark),
+    -8px -8px 16px var(--shadow-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--accent);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.fab-main:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    12px 12px 24px var(--shadow-dark),
+    -12px -12px 24px var(--shadow-light);
+}
+
+.fab-main:active {
+  transform: scale(0.95);
+  box-shadow:
+    inset 4px 4px 10px var(--shadow-dark),
+    inset -4px -4px 10px var(--shadow-light);
+}
+
+/* Menu container */
+.fab-menu {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.fab-container.open .fab-menu {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Items */
+.fab-item {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  opacity: 0;
+  transform: translate(0, 0);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  box-shadow:
+    6px 6px 12px var(--shadow-dark),
+    -6px -6px 12px var(--shadow-light);
+}
+
+.fab-container.open .fab-item {
+  opacity: 1;
+}
+
+.fab-item svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+}
+
+.fab-item:hover {
+  color: var(--accent);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .fab-main {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+
+  .fab-item {
+    width: 44px;
+    height: 44px;
+  }
+}

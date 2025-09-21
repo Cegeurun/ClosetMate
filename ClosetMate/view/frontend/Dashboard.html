@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-default">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../frontend/shared/themes.css">
+  <link rel="stylesheet" href="icons.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+  <header class="top-bar">
+    <h1>Dashboard</h1>
+    <p>Dashboard View</p>
+  </header>
+
+  <main>
+    <!-- Outfit + Weather in a grid -->
+    <section class="outfit-weather-grid">
+      <!-- Outfit of the Day -->
+      <div class="card glass-card">
+        <h2>Outfit of the Day</h2>
+        <div class="outfit-preview">
+          <div class="preview"><img src="https://via.placeholder.com/72x92" alt="Top"></div>
+          <div class="preview"><img src="https://via.placeholder.com/72x92" alt="Bottom"></div>
+          <div class="preview"><img src="https://via.placeholder.com/72x92" alt="Shoes"></div>
+        </div>
+      </div>
+
+      <!-- Weather (separate card) -->
+      <div class="card glass-card weather-card">
+        <h2>Weather</h2>
+        <div class="weather">
+          <div class="icon">
+            <!-- Sun SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M6.76 4.84l-1.8-1.79L3.5 4.5 5.29 6.3l1.47-1.46zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.71 1.05L17.95 6.3l1.79 1.79 
+              1.76-1.76-1.79-1.28zM20 11v2h3v-2h-3zm-9 9h2v-3h-2v3zm6.24-1.84l1.8 1.79 
+              1.46-1.46-1.79-1.8-1.47 1.47zM4.22 18.36l1.79 1.79 
+              1.47-1.47-1.79-1.79-1.47 1.47zM12 6a6 6 0 100 12 6 6 0 000-12z"/>
+            </svg>
+          </div>
+          <span>25°C Sunny</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upcoming Outfits -->
+    <section class="card glass-card upcoming">
+      <h2>Upcoming Outfits</h2>
+      <div class="list">
+        <div class="item">
+          <span class="date">Sept 21</span>
+          <div class="thumb"><img src="https://via.placeholder.com/46x62" alt="Outfit"></div>
+          <div class="thumb"><img src="https://via.placeholder.com/46x62" alt="Outfit"></div>
+          <button class="icon-btn" aria-label="Edit">
+            <!-- Edit Pencil -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M3 17.25V21h3.75l11-11.03-3.75-3.75L3 17.25zm14.71-9.54a.996.996 0 
+              000-1.41l-2.34-2.34a.996.996 0 
+              10-1.41 1.41l2.34 2.34c.39.39 1.02.39 1.41 0z"/>
+            </svg>
+          </button>
+          <button class="icon-btn" aria-label="Lock">
+            <!-- Lock -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 17a2 2 0 100-4 2 2 0 000 4zm6-8h-1V7a5 5 0 
+              00-10 0v2H6c-1.1 0-2 .9-2 
+              2v9c0 1.1.9 2 2 
+              2h12c1.1 0 2-.9 
+              2-2v-9c0-1.1-.9-2-2-2zm-6 
+              9c-1.66 0-3-1.34-3-3s1.34-3 
+              3-3 3 1.34 3 3-1.34 3-3 
+              3zm3-9H9V7a3 3 0 016 0v2z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="card glass-card">
+      <h2>Quick Actions</h2>
+      <div class="quick-actions">
+        <button class="neu-button accent">
+          <!-- Shuffle Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M10.59 9.17L5.41 4 4 5.41l5.17 
+            5.17 1.42-1.41zM14.83 
+            4L20 9.17 18.59 
+            10.59 14.83 6.83V10h-2V4h2v2zM4 
+            18.59L5.41 20l5.17-5.17-1.42-1.42L4 
+            18.59zM14.83 
+            20l5.17-5.17-1.41-1.42L14.83 
+            17.17V14h-2v6h2v-2z"/>
+          </svg>
+          Shuffle Outfit
+        </button>
+        <button class="neu-button">
+          <!-- Apply Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M5 13l4 4L19 7l-1.41-1.41L9 
+            14.17l-2.59-2.58L5 
+            13z"/>
+          </svg>
+          Apply to All
+        </button>
+        <button class="neu-button danger">
+          <!-- Lock All -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 17a2 2 0 100-4 2 2 0 
+            000 4zm6-8h-1V7a5 5 0 
+            00-10 0v2H6c-1.1 0-2 .9-2 
+            2v9c0 1.1.9 2 2 
+            2h12c1.1 0 2-.9 
+            2-2v-9c0-1.1-.9-2-2-2zm-6 
+            9c-1.66 0-3-1.34-3-3s1.34-3 
+            3-3 3 1.34 3 3-1.34 3-3 
+            3zm3-9H9V7a3 3 0 016 0v2z"/>
+          </svg>
+          Lock All
+        </button>
+      </div>
+    </section>
+
+    <!-- Closet Health Summary -->
+    <section class="card glass-card idle">
+      <h2>Closet Health Summary</h2>
+      <p class="count">12 Idle Items</p>
+      <div class="barwrap">
+        <div class="bar" style="width: 60%"></div>
+      </div>
+      <small>Sustainability Score</small>
+    </section>
+
+    <!-- Notifications -->
+    <section class="card glass-card alert">
+      <div class="alert-icon">
+        <!-- Alert Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M1 21h22L12 2 1 21zm12-3h-2v2h2v-2zm0-8h-2v6h2v-6z"/>
+        </svg>
+      </div>
+      <p>5 items haven’t been worn in 90 days</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
