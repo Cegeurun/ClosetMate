@@ -9,20 +9,11 @@
   <link rel="stylesheet" href="/css/pages.css">
 </head>
 <body>
-  <div class="glass-card">
-    <div class="login-header">
-      <div class="neu-icon">
-        <div class="icon-inner">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-        </div>
-      </div>
-      <h2>Welcome back</h2>
-      <p>Please sign in to continue</p>
-    </div>
+<div class="index-container">
+    <div class="glass-card">
+      <h2 class="login-header">Welcome back</h2>
 
+      <p>Please sign in to continue</p>
     <form class="login-form" id="loginForm" novalidate>
       <!-- Email -->
       <div class="form-group">
@@ -70,16 +61,18 @@
        </div>
 
 
-
+      <div>
       <button type="submit" class="neu-button login-btn">
         <span class="btn-text">Sign In</span>
         <div class="btn-loader"><div class="neu-spinner"></div></div>
       </button>
     </form>
+    </div>
 
     <div class="signup-link">
       <p>Don't have an account? <a href="signup.html">Sign up</a></p>
     </div>
+  </div>
   </div>
 
   <script src="../frontend/shared/FormUtils.js"></script>

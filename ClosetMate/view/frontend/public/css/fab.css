@@ -77,6 +77,14 @@
     6px 6px 12px var(--shadow-dark),
     -6px -6px 12px var(--shadow-light);
 }
+.fab-item svg,
+.fab-main svg {
+  display: block;
+  margin: auto;
+  fill: currentColor;   /* makes fill icons follow theme */
+  stroke: currentColor; /* makes outline icons follow theme */
+  stroke-width: 2;
+}
 
 .fab-container.open .fab-item {
   opacity: 1;
@@ -87,6 +95,10 @@
   height: 22px;
   stroke: currentColor;
 }
+.neu-social.google { color: #db4437; }   /* Google red */
+.neu-social.facebook { color: #1877f2; } /* Facebook blue */
+.neu-social.apple { color: #000; }       /* Apple black */
+
 
 .fab-item:hover {
   color: var(--accent);
