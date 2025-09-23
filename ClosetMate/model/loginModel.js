@@ -42,7 +42,7 @@ export async function verifyLogin(user_username, user_password)
 {
 
     const [selection] = await pool.query(`
-        SELECT * FROM users WHERE username = ?`, [user_username]);
+        SELECT * FROM users WHERE name = ?`, [user_username]);
     
     if(selection.length === 0){return false;} // 
 

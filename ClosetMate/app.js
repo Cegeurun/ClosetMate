@@ -13,7 +13,7 @@ app.use('/css',  express.static(path.join(__dirname, 'view', 'frontend', 'public
 app.use('/js',   express.static(path.join(__dirname, 'view', 'frontend', 'public', 'js')));
 app.use('/img',  express.static(path.join(__dirname, 'view', 'frontend', 'public', 'images')));
 
-console.log("Serving static from:", path.join(__dirname, 'view', 'frontend', 'public', 'css'));
+console.log(__dirname);
 
 // Load Connection Pool
 pool;

@@ -7,7 +7,7 @@ const route = express.Router();
 route.use(express.urlencoded({ extended: true }));
 
 route.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, '/view/frontend/login.html'));
+    res.sendFile(path.join(__dirname, '/view/frontend/index.html'));
 });
 
 route.get('/signup', (req, res) => {
@@ -20,9 +20,9 @@ route.post('/login', async (req,res) => {
     // console.log(req.body.password);
     // console.log(req.body.email);
 
-    console.log(await loginModel.verifyLogin(req.body.username, req.body.password));
+    console.log(await loginModel.verifyLogin(req.body.email, req.body.password));
     
-    res.redirect('/login');
+    res.redirect('/dashboard');
 
 });
 
@@ -33,7 +33,7 @@ route.post('/signup',async (req,res) => {
 
     console.log(await loginModel.createUser(req.body.username, req.body.password, req.body.email));
     
-    res.redirect('/signup');
+    res.redirect('/login');
 });
 
 

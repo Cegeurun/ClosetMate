@@ -4,8 +4,8 @@ import { __dirname } from '../dirname.js';
 
 const route = express.Router();
 
-route.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../view/frontend/index.html'));
+route.get('/dashboard', (req, res) => {
+    res.sendFile(path.join(__dirname, '/view/frontend/Dashboard.html'));
 });
 
 
