@@ -7,17 +7,18 @@ const route = express.Router();
 route.use(express.urlencoded({ extended: true }));
 
 route.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, '../view/frontend/login.html'));
+    res.sendFile(path.join(__dirname, '/view/frontend/login.html'));
 });
 
-route.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, '../view/frontend/register.html'));
+route.get('/signup', (req, res) => {
+    res.sendFile(path.join(__dirname, '/view/frontend/signup.html'));
 });
 
 // Login user
 route.post('/login', async (req,res) => {
-    console.log(req.body.username);
-    console.log(req.body.password);
+    console.log(req.body);
+    // console.log(req.body.password);
+    // console.log(req.body.email);
 
     console.log(await loginModel.verifyLogin(req.body.username, req.body.password));
     
@@ -26,13 +27,13 @@ route.post('/login', async (req,res) => {
 });
 
 // Register user
-route.post('/register',async (req,res) => {
+route.post('/signup',async (req,res) => {
   console.log(req.body.username);
     console.log(req.body.password);
 
-    console.log(await loginModel.createUser(req.body.username, req.body.password));
+    console.log(await loginModel.createUser(req.body.username, req.body.password, req.body.email));
     
-    res.redirect('/register');
+    res.redirect('/signup');
 });
 
 

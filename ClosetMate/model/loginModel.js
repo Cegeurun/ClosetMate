@@ -28,12 +28,12 @@ export async function getRow(id)
 }
 
 // Create Account
-export async function createUser(user_username, user_password)
+export async function createUser(user_username, user_password, user_email)
 {
     user_password = hashPassword(user_password);
     const insertResult = await pool.query(`
-        INSERT INTO user_info(user_username, user_password)
-        VALUES (?, ?);`, [user_username, user_password]); // insertResult is just metadata
+        INSERT INTO users(name, password_hash, email)
+        VALUES (?, ?, ?);`, [user_username, user_password, user_email]); // insertResult is just metadata
    return insertResult; 
 }
 
@@ -42,7 +42,7 @@ export async function verifyLogin(user_username, user_password)
 {
 
     const [selection] = await pool.query(`
-        SELECT * FROM user_info WHERE user_username = ?`, [user_username]);
+        SELECT * FROM users WHERE username = ?`, [user_username]);
     
     if(selection.length === 0){return false;} // 
 
