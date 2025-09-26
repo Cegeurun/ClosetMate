@@ -77,3 +77,37 @@ document.addEventListener('DOMContentLoaded', () => {
   FormUtils.addEntranceAnimation(form, 200);
   FormUtils.addSharedAnimations();
 });
+
+
+// Send data to POST /login after clicking submit button
+submitButton.addEventListener("click", async (e) => {
+
+  const form = document.querySelector("#loginForm");
+  const formData = new FormData(form);
+  const email = formData.get("email");
+  const password = formData.get("password");
+
+  const res = fetch("/login", {
+    method: "POST",
+    headers: {"Content Type": "application/json"},
+    body: JSON.stringify({email, password})
+  })
+
+  const data = res.json();
+
+  if (data.success)
+  {
+    // Save Auth token
+    localStorage.setItem("authToken", data.token);
+
+    // Redirect to mainmenu if verifyLogin succeeds
+    window.location.href = "/mainmenu";
+  }
+
+  else
+  {
+    alert(data.error || "Login Failed. Try again.");
+  }
+
+
+})

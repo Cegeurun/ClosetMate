@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-default">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main Menu - ClosetMate</title>
+  <link rel="stylesheet" href="/css/themes.css">
+  <link rel="stylesheet" href="/css/fab.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body>
+  <div class="main-container">
+    
+    <!-- Stretchable Glass Card -->
+    <div class="glass-card stretch">
+
+      <!-- Top Bar -->
+      <div class="top-bar">
+        <!-- Profile Icon (default or uploaded) -->
+        <div class="neu-icon profile-icon">
+          <div class="icon-inner">
+            <img src="../frontend/public/icons/profile.jpg" alt="Profile">
+          </div>
+        </div>
+
+        <h1>Hello, Nicx</h1>
+
+        <!-- Settings Icon Button -->
+          <a href="settings.html" class="neu-icon settings-icon">
+          <div class="icon-inner">
+            <svg viewBox="-8 -20 40 40" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82 2 2 0 1 1-2.83 2.83 
+                      1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.17
+                      a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33 2 2 0 1 1-2.83-2.83 
+                      1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.17
+                      a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82 2 2 0 1 1 2.83-2.83 
+                      1.65 1.65 0 0 0 1.82.33h.06a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.17
+                      a1.65 1.65 0 0 0 1 1.51h.06a1.65 1.65 0 0 0 1.82-.33 2 2 0 1 1 2.83 2.83 
+                      1.65 1.65 0 0 0-.33 1.82v.06a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.17
+                      a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+       <!-- Weather -->
+      <div class="weather-card">
+        <h3>☀️ Sunny 28°C</h3>
+        <p>Looks like it’s sunny today — this top fits the weather!</p>
+      </div>
+
+      <!-- Main Section -->
+      <div class="main-section-grid">
+
+       <div class="main-section-grid">
+        <div class="card-grid">
+          <!-- Menu Cards -->
+          <a href="Closet.html" class="menu-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+            </svg>
+            <h3>Closet</h3>
+            <p>View and manage wardrobe</p>
+          </a>
+
+          <a href="Planner.html" class="menu-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <h3>Planner</h3>
+            <p>Plan your weekly outfits</p>
+          </a>
+
+          <a href="laundry.html" class="menu-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16v16H4z"/>
+              <path d="M10 4v16"/>
+            </svg>
+            <h3>Laundry</h3>
+            <p>Track wash cycles</p>
+          </a>
+        </div>
+      </div>
+
+        
+        <!-- Style Assistant -->
+        <div class="ai-banner">
+          <h3>Style Assistant</h3>
+          <input type="text" id="chatInput" placeholder="Ask AI for outfit suggestions..." />
+          <div class="ai-chat-container chat-area" id="chatContainer">
+            <!-- Chat messages go here -->
+          </div>
+          </div>
+        </div>
+      </div> 
+
+        <!-- Planned Outfits -->
+        <div class="outfits-section">
+          <h3>Planned Outfits</h3>
+          <div class="outfit-scroll">
+            <p class="empty-message">✨ Let’s plan your fits!</p>
+          </div>
+          <div class="outfit-card">
+            <img src="../frontend/public/outfits/outfit1.jpg" alt="Monday Outfit">
+            <span>Monday</span>
+          </div>
+          <div class="outfit-card">
+            <img src="../frontend/public/outfits/outfit2.jpg" alt="Tuesday Outfit">
+            <span>Tuesday</span>
+          </div>
+          <div class="outfit-card">
+            <img src="../frontend/public/outfits/outfit3.jpg" alt="Wednesday Outfit">
+            <span>Wednesday</span>
+          </div>
+        </div>
+
+     <!-- end main-section-grid -->
+
+    </div> <!-- end glass-card -->
+  </div> <!-- end main-container -->
+
+  <script src="../frontend/shared/fab.js"></script>
+  <script src="../frontend/shared/theme-manager.js"></script>
+  <script src="mainmenu.js"></script>
+</body>
+</html>

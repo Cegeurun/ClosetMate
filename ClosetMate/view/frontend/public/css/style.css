@@ -566,5 +566,41 @@ option { background: var(--bg); color: var(--text); }
   margin-bottom: -25rem;
   display:center;
 }
+/* already works for both */
+.decision-buttons button {
+  padding: 8px 12px;
+  margin: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
 
+/* box.js */
+.reuse { background: #4caf50; color: white; }
+.reduce { background: #ff9800; color: white; }
+.recycle { background: #2196f3; color: white; }
+
+/* laundry.js (just add these) */
+.wash { background: #3f51b5; color: white; }   /* blueish for wash */
+.dry { background: #ff5722; color: white; }    /* orange for dry */
+.fold { background: #009688; color: white; }   /* teal for fold */
+/* Standard square photo container */
+.outfit-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1); /* frame background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.outfit-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   /* show full photo */
+  background: #fff;      /* background frame for odd aspect ratios */
+  border-radius: 8px;
+}
 

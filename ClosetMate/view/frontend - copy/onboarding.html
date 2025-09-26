@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-default">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onboarding - ClosetMate</title>
+  <link rel="stylesheet" href="/css/themes.css">
+  <link rel="stylesheet" href="/css/fab.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Onboarding Content -->
+  <div class="onboarding-container">
+    <div class="glass-card">
+      <h2 class="login-header">Welcome to ClosetMate</h2>
+      <p style="text-align:center; margin-bottom:2rem;">Let’s set up your profile and closet.</p>
+
+      <!-- Profile Info -->
+      <h3>Profile Information</h3>
+      <div class="form-group file-upload">
+        <input type="file" id="profilePic" accept="image/*" hidden>
+        <label for="profilePic" class="neu-button">Upload Profile Picture</label>
+        <div id="profilePicPreview" class="file-preview"></div>
+      </div>
+
+      <div class="form-group neu-input">
+        <input type="text" id="name" required placeholder=" ">
+        <label for="name">Nickname</label>
+      </div>
+
+      <div class="form-group neu-input">
+        <input type="date" id="dob" placeholder=" ">
+        <label for="dob">Birthdate</label>
+      </div>
+
+      <div class="form-group neu-input">
+        <select id="gender" required>
+          <option value="" disabled selected></option>
+          <option>Female</option>
+          <option>Male</option>
+          <option>Other</option>
+        </select>
+        <label for="gender">Gender</label>
+      </div>
+
+      <!-- Closet Setup -->
+      <h3>Closet Setup</h3>
+      <div class="form-group file-upload">
+        <input type="file" id="closetUpload" multiple hidden>
+        <label for="closetUpload" class="neu-button">Upload Clothing Items</label> 
+      </div>
+      <div id="closetFiles" class="file-name">No files chosen</div>
+
+      <!-- Actions -->
+      <div class="form-actions">
+        <a href="mainmenu.html" class="neu-button">Save & Continue</a>
+        <a href="mainmenu.html" class="neu-button">Skip for now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 ClosetMate</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../frontend/shared/fab.js"></script>
+  <script src="../frontend/shared/theme-manager.js"></script>
+  <script src="onboarding.js"></script>
+</body>
+</html>

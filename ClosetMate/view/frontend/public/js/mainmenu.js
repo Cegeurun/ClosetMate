@@ -66,18 +66,72 @@ function addChatMessage(text, sender = "user") {
 
   scrollChatToBottom();
 }
+
+// AI Chat
 const chatInput = document.getElementById("chatInput");
 if (chatInput) {
-  chatInput.addEventListener("keypress", (e) => {
+  chatInput.addEventListener("keypress", async (e) => {
     if (e.key === "Enter" && chatInput.value.trim() !== "") {
       const userMsg = chatInput.value.trim();
       addChatMessage(userMsg, "user");
       chatInput.value = "";
 
-      // fake AI reply
-      setTimeout(() => {
-        addChatMessage("Something hot,prolly", "ai");
-      }, 600);
+      // call backend instead of fake reply
+      try {
+        const res = await fetch("/ask-ai", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question: userMsg }),
+        });
+
+        const data = await res.json();
+        addChatMessage(data.reply, "ai"); // show AI reply in chat
+      } catch (err) {
+        addChatMessage("Error: " + err.message, "ai");
+      }
     }
   });
 }
+
+
+// Greetings on top of app
+// RETRIEVE VALUES FROM BACKEND
+async function loadUser() {
+  try {
+    const res = await fetch("/test"); // call backend
+    const data = await res.json();    // parse JSON
+    document.querySelector("#greetings").textContent = 
+      `Hello, ${data.username}`;
+
+  } catch (err) {
+    console.error("Failed to load user:", err);
+  }
+}
+
+
+
+
+loadUser();
+
+// // AI Reply
+// document.getElementById("ask-form").addEventListener("submit", async (e) => {
+//   e.preventDefault();
+
+//   const question = document.getElementById("question").value;
+//   const responseDiv = document.getElementById("response");
+
+//   responseDiv.textContent = "Thinking...";
+
+//   try {
+//     const res = await fetch("/ask-ai", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({ question }),
+//     });
+
+//     const data = await res.json();
+//     responseDiv.textContent = data.reply;
+//   } catch (err) {
+//     responseDiv.textContent = "Error: " + err.message;
+//   }
+// });

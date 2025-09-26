@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="/css/themes.css">
+  <title>Closetmate - Dashboard</title>
   <link rel="stylesheet" href="/css/fab.css">
-  <link rel="stylesheet" href="/css/icons.css">
+  <link rel="stylesheet" href="/css/fab.css">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/themes.css">
 </head>
   <div class="fab-container">
     <div class="fab-main">
@@ -89,7 +89,7 @@
               1.47-1.47-1.79-1.79-1.47 1.47zM12 6a6 6 0 100 12 6 6 0 000-12z"/>
             </svg>
           </div>
-          <span>25°C Sunny</span>
+          <span id="weather">25°C Sunny</span>
         </div>
       </div>
     </section>
@@ -190,13 +190,13 @@
           <path d="M1 21h22L12 2 1 21zm12-3h-2v2h2v-2zm0-8h-2v6h2v-6z"/>
         </svg>
       </div>
-      <p>5 items haven’t been worn in 90 days</p>
+      <p id = "whack">5 items haven’t been worn in 90 days</p>
     </section>
   </main>
 
-  <script src="script.js"></script>
-  <script src="../frontend/shared/fab.js"></script>
-  <script src="../frontend/shared/theme-manager.js"></script>
+  <script src="/js/fab.js"></script>
+  <script src="/js/theme-manager.js"></script>
+  <script src="/js/Dashboard.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,570 @@
+/* ================= Global / Shared Styles ================= */
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; /* allow page scroll */
+  align-items: center;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* Shared glass card */
+.glass-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 20px;
+  background: var(--bg);
+  box-shadow:
+    20px 20px 20px var(--shadow-dark),
+    -20px -20px 60px var(--shadow-light);
+  margin: 1rem auto;
+}
+  .glass-card.sections{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 20px;
+  background: var(--bg);
+  box-shadow:
+    20px 20px 20px var(--shadow-dark),
+    0px 0px 10px 5px var(--shadow-light);
+  margin: 1rem auto;
+}
+.glass-card h2 {
+  font-size: 1.75rem;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+.glass-card h3 {
+  font-size: 1.25rem;
+  color: var(--text);
+  margin: 2rem 0 1rem;
+  font-weight: 600;
+}
+.glass-card h2,
+.glass-card h3,
+.glass-card div {
+  margin-bottom: 1.5rem;
+}
+.glass-card.stretch {
+  width: 100%;
+  max-width: 1200px;
+  min-height: 80vh;
+  margin: 1rem auto;
+  padding: 2rem;
+}
+
+/* Scrollbar inside card */
+.glass-card::-webkit-scrollbar { width: 6px; }
+.glass-card::-webkit-scrollbar-thumb {
+  background: var(--shadow-dark);
+  border-radius: 10px;
+}
+.glass-card::-webkit-scrollbar-track { background: transparent; }
+
+/* Neumorphic Icon */
+.neu-icon {
+  width: 48px;          /* same size for all icons */
+  height: 48px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-inset);
+  display: flex;
+  align-items: center;   /* vertical centering */
+  justify-content: center; /* horizontal centering */
+  overflow: hidden;     /* keeps profile image clipped */
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.neu-icon .icon-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 100%;
+}
+
+
+.neu-icon svg {
+  width: 50%;
+  height: 50%;
+}
+
+.neu-icon:hover {
+  box-shadow:
+    4px 4px 10px var(--shadow-dark),
+    -4px -4px 10px var(--shadow-light),
+    inset 4px 4px 10px var(--shadow-dark),
+    inset -4px -4px 10px var(--shadow-light);
+}
+.icon-inner {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+.icon-inner svg { width: 100%; height: 100%; }
+
+/* Inputs + Floating Labels */
+.form-group { margin-bottom: 28px; position: relative; }
+.neu-input {
+  position: relative;
+  background: var(--bg);
+  border-radius: 15px;
+  box-shadow:
+    inset 8px 8px 16px var(--shadow-dark),
+    inset -8px -8px 16px var(--shadow-light);
+  transition: all 0.3s ease;
+}
+.neu-input:focus-within {
+  box-shadow:
+    inset 4px 4px 8px var(--shadow-dark),
+    inset -4px -4px 8px var(--shadow-light);
+}
+.neu-input input,
+.neu-input select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 20px 24px;
+  padding-left: 55px;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 500;
+  outline: none;
+}
+.neu-input input::placeholder { color: transparent; }
+.neu-input label {
+  position: absolute;
+  left: 55px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 16px;
+  font-weight: 400;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+.neu-input input:focus + label,
+.neu-input input:not(:placeholder-shown) + label,
+.neu-input select:focus + label,
+.neu-input select:valid + label {
+  top: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+  transform: translateY(0);
+}
+
+/* Input Icon */
+.input-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+.input-icon svg { width: 100%; height: 100%; }
+.neu-input:focus-within .input-icon { color: var(--text); }
+
+/* Password Toggle */
+.neu-toggle {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--bg);
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  box-shadow:
+    4px 4px 10px var(--shadow-dark),
+    -4px -4px 10px var(--shadow-light);
+  transition: all 0.3s ease;
+}
+.neu-toggle:hover { color: var(--text); }
+.neu-toggle:active {
+  box-shadow:
+    inset 2px 2px 5px var(--shadow-dark),
+    inset -2px -2px 5px var(--shadow-light);
+}
+.password-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text, #333);
+}
+
+.password-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+
+/* Checkbox */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.checkbox-label input[type="checkbox"] { display: none; }
+.checkbox-label .neu-checkbox {
+  width: 22px;
+  height: 22px;
+  background: var(--bg);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    3px 3px 8px var(--shadow-dark),
+    -3px -3px 8px var(--shadow-light);
+  transition: all 0.3s ease;
+}
+.checkbox-label .neu-checkbox svg {
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
+  opacity: 0;
+  transform: scale(0.7);
+  transition: all 0.3s ease;
+}
+.checkbox-label input[type="checkbox"]:checked + .neu-checkbox {
+  box-shadow:
+    inset 2px 2px 5px var(--shadow-dark),
+    inset -2px -2px 5px var(--shadow-light);
+}
+.checkbox-label input[type="checkbox"]:checked + .neu-checkbox svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Dropdown */
+select {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-size: 15px;
+  font-family: inherit;
+  background: var(--bg);
+  color: var(--text);
+  box-shadow:
+    inset 2px 2px 5px var(--shadow-dark),
+    inset -2px -2px 5px var(--shadow-light);
+  outline: none;
+  transition: all 0.3s ease;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--accent) 50%),
+                    linear-gradient(135deg, var(--accent) 50%, transparent 50%);
+  background-position: calc(100% - 20px) calc(1em + 2px),
+                       calc(100% - 15px) calc(1em + 2px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+select:focus {
+  box-shadow:
+    inset 3px 3px 6px var(--shadow-dark),
+    inset -3px -3px 6px var(--shadow-light),
+    0 0 0 2px var(--accent);
+}
+option { background: var(--bg); color: var(--text); }
+
+/* Buttons */
+/* Default smart button */
+.neu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: 15px;
+  border: none;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow:
+    6px 6px 12px var(--shadow-dark),
+    -6px -6px 12px var(--shadow-light);
+  transition: all 0.3s ease;
+  text-align: center;
+  width: auto;        
+  max-width: 100%;    
+}
+.index-container .neu-button,
+.signup-container .neu-button {
+  display: flex;
+  width: 100%;
+}     
+.neu-button:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    12px 12px 30px var(--shadow-dark),
+    -12px -12px 30px var(--shadow-light);
+}
+.neu-button:active {
+  transform: translateY(0);
+  box-shadow:
+    inset 4px 4px 10px var(--shadow-dark),
+    inset -4px -4px 10px var(--shadow-light);
+}
+.neu-button.danger { color: var(--danger); }
+.neu-button.accent { color: var(--accent); }
+
+/* Divider */
+.divider-line {
+  background: linear-gradient(90deg, transparent, var(--shadow-dark), transparent);
+}
+.divider span { color: var(--text-muted); }
+
+/* Social Login */
+.neu-social {
+  width: 50px;
+  height: 50px;
+  background: var(--bg);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  box-shadow:
+    6px 6px 15px var(--shadow-dark),
+    -6px -6px 15px var(--shadow-light);
+  transition: all 0.3s ease;
+}
+.neu-social:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    8px 8px 20px var(--shadow-dark),
+    -8px -8px 20px var(--shadow-light);
+}
+.neu-social:active {
+  transform: translateY(0);
+  box-shadow:
+    inset 3px 3px 8px var(--shadow-dark),
+    inset -3px -3px 8px var(--shadow-light);
+}
+/* ================= Closet Page Styles ================= */
+
+/* Closet grid */
+.closet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.closet-item {
+  background: var(--bg);
+  border-radius: 15px;
+  box-shadow:
+    6px 6px 12px var(--shadow-dark),
+    -6px -6px 12px var(--shadow-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  transition: all 0.3s ease;
+}
+.closet-item img {
+  max-width: 100%;
+  max-height: 100px;
+  object-fit: contain;
+}
+.closet-item:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    10px 10px 20px var(--shadow-dark),
+    -10px -10px 20px var(--shadow-light);
+}
+
+/* Filters */
+.filter-btn,
+.sub-filter-btn {
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: none;
+  background: var(--bg);
+  color: var(--text); /* ✅ text adapts to theme */
+  font-weight: 500;
+  box-shadow:
+    6px 6px 15px var(--shadow-dark),
+    -6px -6px 15px var(--shadow-light);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.filter-btn.active,
+.sub-filter-btn.active {
+  color: var(--accent); /* ✅ highlight with accent */
+  box-shadow:
+    inset 3px 3px 6px var(--shadow-dark),
+    inset -3px -3px 6px var(--shadow-light);
+}
+.filter-btn:hover,
+.sub-filter-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Tags */
+.tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+.tag {
+  background: var(--bg);
+  padding: 0.3rem 0.8rem;
+  border-radius: 10px;
+  font-size: 13px;
+  color: var(--text-muted);
+  box-shadow:
+    inset 2px 2px 5px var(--shadow-dark),
+    inset -2px -2px 5px var(--shadow-light);
+}
+.tag-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tag-option {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border-radius: 20px;
+  border: none;
+  background: var(--bg);
+  color: var(--text-muted);
+  cursor: pointer;
+  box-shadow:
+    2px 2px 5px var(--shadow-dark),
+    -2px -2px 5px var(--shadow-light);
+  transition: all 0.2s ease;
+}
+
+.tag-option.active {
+  background: var(--accent);
+  color: #fff;
+  box-shadow:
+    inset 2px 2px 5px var(--shadow-dark),
+    inset -2px -2px 5px var(--shadow-light);
+}
+
+.tag-option:hover {
+  transform: translateY(-1px);
+}
+
+/* Action buttons */
+.action-btn {
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: none;
+  background: var(--bg);
+  color: var(--text);
+  font-weight: 600;
+  box-shadow:
+    6px 6px 15px var(--shadow-dark),
+    -6px -6px 15px var(--shadow-light);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.action-btn:hover {
+  transform: translateY(-2px);
+}
+.action-btn:active {
+  box-shadow:
+    inset 3px 3px 6px var(--shadow-dark),
+    inset -3px -3px 6px var(--shadow-light);
+}
+.action-btn.danger {
+  color: var(--danger);
+}
+.action-btn.accent {
+  color: var(--accent);
+}
+.actions {
+  display: flex;
+  justify-content: center; /* centers buttons horizontally */
+  align-items: center;     /* centers them vertically if there's extra height */
+  gap: 1rem;               /* adds spacing between buttons */
+  margin-top: 1.5rem;      /* pushes them down a bit for balance */
+}
+/* ================= Closet Top Section ================= */
+
+/* Info layout: photo + details side by side */
+.closet-top .info-area {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Item photo box */
+.item-photo {
+  flex: 0 0 180px;
+  height: 220px;
+  border-radius: 20px;
+  background: var(--bg);
+  box-shadow:
+    8px 8px 20px var(--shadow-dark),
+    -8px -8px 20px var(--shadow-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.item-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* Item details */
+.item-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.item-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: -25rem;
+  display:center;
+}
+
+

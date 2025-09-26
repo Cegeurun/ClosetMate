@@ -6,6 +6,7 @@ const app = express();
 app.use(express.json());
 
 
+
 app.get('/', (req,res) => {
     res.sendFile('D:/Programming_Files/OdinP_Exercises/NodeJS-Course/nodetest/index.html');
 })
@@ -13,6 +14,9 @@ app.get('/', (req,res) => {
 app.post("/ask-ai", async (req, res) => {
   try {
     console.log('now running code');
+    const {question} = req.body;
+    console.log(req.body);
+
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -40,31 +44,26 @@ app.post("/ask-ai", async (req, res) => {
 
         { 
             role: "user", 
-            content: "What do you recommend for me to wear on a bright sunny day in the summer?" }
+            content: question }
         ]
       }),
     });
 
+    
+
     const data = await response.json();
-    res.json(data.choices[0].message.content);
+
+
+res.json({ reply: data.choices[0].message.content });
+
+console.log("AI reply:", data?.choices?.[0]?.message?.content); // ✅ this is the AI's text
+
+console.log("End of code");
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-//   method: "POST",
-//   headers: {
-//     "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
-//     "Content-Type": "application/json",
-//   },
-//   body: JSON.stringify({
-//     model: "deepseek/deepseek-chat-v3.1:free",
-//     messages: [
-//       { role: "user", content: "Hello AI, what is the meaning of life?" }
-//     ]
-//   }),
-// });
 
-// const data = await response.json();
-// console.log(data.choices[0].message.content);
+export default app;

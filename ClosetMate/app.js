@@ -1,5 +1,6 @@
 import express from 'express';
-import routeManager from './routes/routeManager.js'
+import routeManager from './routes/routeManager.js';
+import serviceManager from './services/serviceManager.js';
 import {pool} from './model/loginModel.js';
 import path from 'path';
 import { __dirname } from './dirname.js';
@@ -11,7 +12,7 @@ const app = express();
 // Load folders
 app.use('/css',  express.static(path.join(__dirname, 'view', 'frontend', 'public', 'css')));
 app.use('/js',   express.static(path.join(__dirname, 'view', 'frontend', 'public', 'js')));
-app.use('/img',  express.static(path.join(__dirname, 'view', 'frontend', 'public', 'images')));
+app.use('/media',  express.static(path.join(__dirname, 'view', 'frontend', 'public', 'media')));
 
 console.log(__dirname);
 
@@ -19,6 +20,7 @@ console.log(__dirname);
 pool;
 
 app.use(routeManager);
+app.use(serviceManager);
 // app.use(modelManager);
 // app.use(controllerManager);
 

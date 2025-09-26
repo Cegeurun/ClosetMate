@@ -38,23 +38,64 @@ export async function createUser(user_username, user_password, user_email)
 }
 
 // Verify Account Credentials
-export async function verifyLogin(user_username, user_password)
+export async function verifyLogin(user_email, user_password)
 {
-
     const [selection] = await pool.query(`
-        SELECT * FROM users WHERE name = ?`, [user_username]);
+        SELECT * FROM users WHERE email = ?`, [user_email]);
     
     if(selection.length === 0){return false;} // 
 
     const selectionObj = selection[0];
     user_password = hashPassword(user_password);
-
-    return selectionObj.user_password === user_password;
+    
+    const isValid = (selectionObj.password_hash === user_password);
+    return ({
+      success: isValid,
+      id: selectionObj.id,
+      name: selectionObj.name,
+      email: selectionObj.email
+    });
 }
 
 // Reset User Password
 export async function resetPassword(user_username){
     
+}
+
+
+export async function getUserData(username, password) {
+  // Fetch user record
+  const [rows] = await pool.query(
+    `SELECT id, name, email, password_hash, location, preferences, created_at
+     FROM users
+     WHERE name = ?`,
+    [username]
+  );
+
+  if (rows.length === 0) return false; // user not found
+
+  const user = rows[0];
+  const hashed = hashPassword(password);
+
+  if (user.password_hash !== hashed) return false; // wrong password
+
+  // Parse preferences JSON safely
+  let preferences = {};
+  try {
+    preferences = JSON.parse(user.preferences || "{}");
+  } catch (err) {
+    console.warn("Failed to parse user preferences JSON:", err);
+  }
+
+  // Return user object without password hash
+  return {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    location: user.location,
+    preferences,
+    created_at: user.created_at
+  };
 }
 
 // const user_info = await getRow(1);

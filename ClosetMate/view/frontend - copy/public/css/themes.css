@@ -1,0 +1,172 @@
+/* ================= Default Theme ================= */
+html.theme-default {
+  --bg: #e0e5ec;
+  --text: #3d4468;
+  --text-muted: #6c7293;
+  --shadow-dark: #bec3cf;
+  --shadow-light: #ffffff;
+  --accent: #00c896;
+  --danger: #ff3b5c;
+}
+
+/* ================= Midnight Blues ================= */
+html.theme-midnight {
+  --bg: #0C1821;
+  --text: #CCC9DC;
+  --text-muted: #7C8CA5;
+  --shadow-dark: #000000;
+  --shadow-light: #1B2A41;
+  --accent: #4DB6FF;
+  --danger: #FF5C77;
+}
+
+/* ================= Soft Ivory ================= */
+html.theme-ivory {
+  --bg: #F3D8C7;
+  --text: #5A3E36;
+  --text-muted: #8A6B63;
+  --shadow-dark: #D0B8AC;
+  --shadow-light: #FFFFFF;
+  --accent: #C97A40;
+  --danger: #C94C4C;
+}
+
+/* ================= Earthy Tones ================= */
+html.theme-earth {
+  --bg: #DAD2BC;
+  --text: #252323;
+  --text-muted: #70798C;
+  --shadow-dark: #A99985;
+  --shadow-light: #F5F1ED;
+  --accent: #6B705C;
+  --danger: #B23A48;
+}
+
+/* ================= Apply Variables ================= */
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text);
+}
+
+p, label, span {
+  color: var(--text-muted);
+}
+
+.glass-card {
+  background: var(--bg);
+  box-shadow:
+    20px 20px 60px var(--shadow-dark),
+    -20px -20px 60px var(--shadow-light);
+}
+
+/* ---------- Buttons ---------- */
+.neu-button {
+  background: var(--bg);
+  color: var(--text);
+  box-shadow:
+    8px 8px 20px var(--shadow-dark),
+    -8px -8px 20px var(--shadow-light);
+}
+.neu-button:hover {
+  box-shadow:
+    12px 12px 30px var(--shadow-dark),
+    -12px -12px 30px var(--shadow-light);
+}
+.neu-button:active {
+  box-shadow:
+    inset 4px 4px 10px var(--shadow-dark),
+    inset -4px -4px 10px var(--shadow-light);
+}
+
+/* Accent & Danger Buttons */
+.neu-button.accent {
+  color: var(--accent);
+}
+.neu-button.danger {
+  color: var(--danger);
+}
+
+/* ---------- Inputs ---------- */
+.neu-input {
+  background: var(--bg);
+  box-shadow:
+    inset 8px 8px 16px var(--shadow-dark),
+    inset -8px -8px 16px var(--shadow-light);
+}
+.neu-input:focus-within {
+  box-shadow:
+    inset 4px 4px 8px var(--shadow-dark),
+    inset -4px -4px 8px var(--shadow-light);
+}
+.neu-input input,
+.neu-input select {
+  background: transparent;
+  color: var(--text);
+}
+.neu-input label {
+  color: var(--text-muted);
+}
+
+/* ---------- Checkboxes ---------- */
+.neu-checkbox {
+  background: var(--bg);
+  box-shadow:
+    3px 3px 8px var(--shadow-dark),
+    -3px -3px 8px var(--shadow-light);
+}
+.remember-wrapper input[type="checkbox"]:checked + .checkbox-label .neu-checkbox {
+  box-shadow:
+    inset 2px 2px 5px var(--shadow-dark),
+    inset -2px -2px 5px var(--shadow-light);
+}
+.neu-checkbox svg {
+  color: var(--accent);
+}
+
+/* ---------- Toggles ---------- */
+.neu-toggle {
+  background: var(--bg);
+  color: var(--text-muted);
+  box-shadow:
+    4px 4px 10px var(--shadow-dark),
+    -4px -4px 10px var(--shadow-light);
+}
+.neu-toggle:hover {
+  color: var(--text);
+}
+.neu-toggle:active {
+  box-shadow:
+    inset 2px 2px 5px var(--shadow-dark),
+    inset -2px -2px 5px var(--shadow-light);
+}
+
+/* ---------- Divider ---------- */
+.divider-line {
+  background: linear-gradient(90deg, transparent, var(--shadow-dark), transparent);
+}
+.divider span {
+  color: var(--text-muted);
+}
+
+/* ---------- Social Buttons ---------- */
+.neu-social {
+  background: var(--bg);
+  color: var(--text);
+  box-shadow:
+    6px 6px 15px var(--shadow-dark),
+    -6px -6px 15px var(--shadow-light);
+}
+.neu-social:hover {
+  box-shadow:
+    8px 8px 20px var(--shadow-dark),
+    -8px -8px 20px var(--shadow-light);
+}
+.neu-social:active {
+  box-shadow:
+    inset 3px 3px 8px var(--shadow-dark),
+    inset -3px -3px 8px var(--shadow-light);
+}

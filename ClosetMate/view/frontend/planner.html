@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-default">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClosetMate - Planner</title>
+  <link rel="stylesheet" href="/css/fab.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/themes.css">
+</head>
+<body>
+
+  <!-- FAB -->
+  <div class="fab-container">
+    <!-- Main FAB (plus icon) -->
+    <div class="fab-main">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+        <line x1="12" y1="5" x2="12" y2="19"/>
+        <line x1="5" y1="12" x2="19" y2="12"/>
+      </svg>
+    </div>
+
+    <!-- FAB Menu -->
+    <div class="fab-menu">
+      <!-- Home -->
+      <a href="mainmenu.html" class="fab-item" title="Home">
+        <svg viewBox="0 0 24 24">
+          <path d="M3 9.5L12 3l9 6.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V9.5z"/>
+        </svg>
+      </a>
+
+      <!-- Dashboard -->
+      <a href="dashboard.html" class="fab-item" title="Dashboard">
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7" rx="1"/>
+          <rect x="14" y="3" width="7" height="4" rx="1"/>
+          <rect x="14" y="10" width="7" height="11" rx="1"/>
+          <rect x="3" y="13" width="7" height="8" rx="1"/>
+        </svg>
+      </a>
+
+      <!-- Closet -->
+      <a href="closet.html" class="fab-item" title="Closet">
+        <!-- Closet Icon -->
+        <svg viewBox="0 0 24 24" fill="none">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M11.25 2H10C6.22 2 4.34 2 3.17 3.17C2 4.34 2 6.22 2 10V12C2 15.77 2 17.65 3.17 18.82C3.47 19.13 3.82 19.36 4.25 19.52V22C4.25 22.41 4.58 22.75 5 22.75C5.41 22.75 5.75 22.41 5.75 22V19.87C6.82 20 8.19 20 10 20H11.25V2ZM9 8.25C9.41 8.25 9.75 8.58 9.75 9V13C9.75 13.41 9.41 13.75 9 13.75C8.58 13.75 8.25 13.41 8.25 13V9C8.25 8.58 8.58 8.25 9 8.25Z"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M12.75 20H14C15.80 20 17.18 20 18.25 19.87V22C18.25 22.41 18.58 22.75 19 22.75C19.41 22.75 19.75 22.41 19.75 22V19.52C20.17 19.36 20.52 19.13 20.82 18.82C22 17.65 22 15.77 22 12V10C22 6.22 22 4.34 20.82 3.17C19.65 2 17.77 2 14 2H12.75V20ZM15 8.25C15.41 8.25 15.75 8.58 15.75 9V13C15.75 13.41 15.41 13.75 15 13.75C14.58 13.75 14.25 13.41 14.25 13V9C14.25 8.58 14.58 8.25 15 8.25Z"/>
+        </svg>
+      </a>
+
+      <!-- Planner -->
+      <a href="planner.html" class="fab-item" title="Planner">
+        <!-- Planner Icon -->
+        <svg viewBox="0 0 24 24" fill="none">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M10.28 3.9C10.28 3.34 10.82 2.75 11.66 2.75C12.49 2.75 13.03 3.34 13.03 3.9C13.03 4.22 12.92 4.49 12.74 4.68C12.62 4.81 12.5 4.93 12.36 5.07L12.27 5.15C12.11 5.32 11.92 5.51 11.75 5.71C11.48 6.02 11.19 6.43 11.09 6.94C10.46 7.04 9.85 7.28 9.31 7.66L2.22 12.65C1.29 13.3 1.05 14.35 1.39 15.23C1.72 16.1 2.58 16.75 3.7 16.75H5.25V19C5.25 19.89 5.25 20.64 5.33 21.23C5.41 21.85 5.59 22.41 6.05 22.86C6.51 23.32 7.07 23.5 7.7 23.58C8.3 23.66 9.05 23.66 9.94 23.66H14.05C14.95 23.66 15.7 23.66 16.29 23.58C16.92 23.5 17.49 23.32 17.94 22.86C18.39 22.41 18.58 21.85 18.66 21.23C18.74 20.64 18.74 19.89 18.74 19V16.75H20.29C21.42 16.75 22.28 16.09 22.61 15.21C22.94 14.32 22.68 13.27 21.73 12.62L14.3 7.61C13.8 7.28 13.25 7.06 12.68 6.95C12.74 6.87 12.8 6.78 12.89 6.68C13.02 6.53 13.16 6.38 13.33 6.22L13.4 6.14C13.55 6 13.7 5.85 13.84 5.7C14.28 5.22 14.53 4.58 14.53 3.9C14.53 2.36 13.16 1.25 11.66 1.25C10.14 1.25 8.78 2.36 8.78 3.9C8.78 4.32 9.12 4.66 9.53 4.66C9.94 4.66 10.28 4.32 10.28 3.9Z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-container planner-container">
+     <div class="glass-card stretch">
+    <h1 style="margin: 0; text-align: center;">Planner</h1>
+
+    <!-- AI Assistant -->
+    <div class="glass-card sections">
+      <div class="ai-banner">
+        <h3>Style Assistant</h3>
+        <input type="text" id="chatInput" placeholder="Ask AI for outfit suggestions..." />
+        <div class="ai-chat-container" id="chatContainer"></div>
+      </div>
+      <div class="outfits-section">
+        <h3>AI Suggested Outfits</h3>
+        <div class="outfit-grid" id="aiOutfits"></div>
+      </div>
+    </div>
+
+    <!-- Manual Outfit Builder -->
+    <div class="glass-card sections">
+      <h3>Manual Outfit Builder</h3>
+      <div class="manual-builder" id="manualBuilder">
+        <!-- Dynamic rows will be added here -->
+        <div class="builder-row">
+          <button class="nav-btn">&lt;</button>
+          <div class="builder-slot" data-label="top"><span>Top</span></div>
+          <button class="nav-btn">&gt;</button>
+        </div>
+        <div class="builder-row">
+          <button class="nav-btn">&lt;</button>
+          <div class="builder-slot" data-label="bottom"><span>Bottom</span></div>
+          <button class="nav-btn">&gt;</button>
+        </div>
+        <div class="builder-row">
+          <button class="nav-btn">&lt;</button>
+          <div class="builder-slot" data-label="shoes"><span>Shoes</span></div>
+          <button class="nav-btn">&gt;</button>
+        </div>
+      </div>
+      <div class="quick-actions">
+        <button class="neu-button" id="addCategoryBtn">Add Category</button>
+        <button class="neu-button danger" id="deleteCategoryBtn">Delete Category</button>
+        <button class="neu-button accent" id="finalizeBtn">Finalize</button>
+        <button class="neu-button" id="cancelBtn">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Display Section -->
+    <div class="glass-card sections">
+      <h3>Planned Outfits</h3>
+      <div class="view-switch">
+        <button class="neu-button accent">Board</button>
+        <button class="neu-button">Table</button>
+        <button class="neu-button">Calendar</button>
+      </div>
+      <div class="outfit-grid" id="boardView"></div>
+      <div class="upcoming list" id="tableView" style="display:none;"></div>
+      <div class="display-calendar" id="calendarView" style="display:none;"></div>
+    </div>
+
+    <!-- CRUD -->
+    <div class="actions" style="margin-top: 20px;">
+      <button class="neu-button accent">Add</button>
+      <button class="neu-button">Edit</button>
+      <button class="neu-button danger">Delete</button>
+    </div>
+    </div>
+  </div>
+
+  <script src="/js/fab.js"></script>
+  <script src="/js/theme-manager.js"></script>
+  <script src="/js/planner.js"></script>
+</body>
+</html>

@@ -4,10 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Main Menu - ClosetMate</title>
-  <link rel="stylesheet" href="/css/themes.css">
+  <link rel="stylesheet" href="/css/fab.css">
   <link rel="stylesheet" href="/css/fab.css">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/themes.css">
+</head>
 </head>
 <body>
   <div class="main-container">
@@ -20,12 +22,11 @@
         <!-- Profile Icon (default or uploaded) -->
         <div class="neu-icon profile-icon">
           <div class="icon-inner">
-            <img src="../frontend/public/icons/profile.jpg" alt="Profile">
+            <img src="/icons/profile.jpg" alt="Profile">
           </div>
         </div>
 
-        <h1>Hello, Nicx</h1>
-
+        <h1 id="greetings">Hello, Nicx</h1>
         <!-- Settings Icon Button -->
           <a href="settings.html" class="neu-icon settings-icon">
           <div class="icon-inner">
@@ -102,18 +103,18 @@
         <div class="outfits-section">
           <h3>Planned Outfits</h3>
           <div class="outfit-scroll">
-            <p class="empty-message">✨ Let’s plan your fits!</p>
+            <p class="empty-message"> Let’s plan your fits!</p>
           </div>
           <div class="outfit-card">
-            <img src="../frontend/public/outfits/outfit1.jpg" alt="Monday Outfit">
+            <img src="/outfits/outfit1.jpg" alt="Monday Outfit">
             <span>Monday</span>
           </div>
           <div class="outfit-card">
-            <img src="../frontend/public/outfits/outfit2.jpg" alt="Tuesday Outfit">
+            <img src="/outfits/outfit2.jpg" alt="Tuesday Outfit">
             <span>Tuesday</span>
           </div>
           <div class="outfit-card">
-            <img src="../frontend/public/outfits/outfit3.jpg" alt="Wednesday Outfit">
+            <img src="/outfits/outfit3.jpg" alt="Wednesday Outfit">
             <span>Wednesday</span>
           </div>
         </div>
@@ -123,8 +124,9 @@
     </div> <!-- end glass-card -->
   </div> <!-- end main-container -->
 
-  <script src="../frontend/shared/fab.js"></script>
-  <script src="../frontend/shared/theme-manager.js"></script>
-  <script src="mainmenu.js"></script>
+  <script src="/js/fab.js"></script>
+  <script src="/js/theme-manager.js"></script>
+  <script src="/js/mainmenu.js"></script>
+
 </body>
 </html>
