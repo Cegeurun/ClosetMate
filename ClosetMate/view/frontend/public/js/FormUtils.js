@@ -81,5 +81,3 @@ const FormUtils = {
 document.addEventListener("DOMContentLoaded", () => {
   FormUtils.initPasswordToggles();
 });
-
-export default FormUtils;

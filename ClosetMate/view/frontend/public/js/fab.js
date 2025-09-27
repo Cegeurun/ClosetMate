@@ -1,19 +1,19 @@
 // Smart draggable FAB with arc menu + auto-close
 document.addEventListener("DOMContentLoaded", () => {
   const fabContainer = document.querySelector(".fab-container");
-  const fabMain = document.querySelector(".fab-main");
+  // const fabMain = document.querySelector(".fab-main");
   const items = document.querySelectorAll(".fab-item");
 
   let isDragging = false;
   let offsetX, offsetY;
 
   // Drag start
-  fabMain.addEventListener("mousedown", (e) => {
-    isDragging = true;
-    offsetX = e.clientX - fabContainer.getBoundingClientRect().left;
-    offsetY = e.clientY - fabContainer.getBoundingClientRect().top;
-    fabContainer.style.transition = "none";
-  });
+  // fabMain.addEventListener("mousedown", (e) => {
+  //   isDragging = true;
+  //   offsetX = e.clientX - fabContainer.getBoundingClientRect().left;
+  //   offsetY = e.clientY - fabContainer.getBoundingClientRect().top;
+  //   fabContainer.style.transition = "none";
+  // });
 
   // Dragging
   document.addEventListener("mousemove", (e) => {
@@ -34,16 +34,16 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Toggle menu
-  fabMain.addEventListener("click", () => {
-    if (isDragging) return;
-    fabContainer.classList.toggle("open");
+  // fabMain.addEventListener("click", () => {
+  //   if (isDragging) return;
+  //   fabContainer.classList.toggle("open");
 
-    if (fabContainer.classList.contains("open")) {
-      openArcMenu();
-    } else {
-      closeArcMenu();
-    }
-  });
+  //   if (fabContainer.classList.contains("open")) {
+  //     openArcMenu();
+  //   } else {
+  //     closeArcMenu();
+  //   }
+  // });
 
   // Auto-close when clicking a menu item
   items.forEach((item) => {

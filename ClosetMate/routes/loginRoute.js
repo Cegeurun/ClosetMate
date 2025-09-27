@@ -5,6 +5,7 @@ import * as loginModel from '../model/loginModel.js';
 import jwt from "jsonwebtoken";
 
 const route = express.Router();
+route.use(express.json());
 route.use(express.urlencoded({ extended: true }));
 
 route.get('/login', (req, res) => {
@@ -40,19 +41,22 @@ route.post('/login', async (req,res) => {
 
 
     const user =  await loginModel.verifyLogin(req.body.email, req.body.password);
-    if (result == true)
+    if (user.success == true)
     {
-        const token = jwt.sign(
-            {id: user.id}, 
-            process.env.JWT_SECRET,
-            {expiresIn: "1h"}
-        );
+        
+        // const token = jwt.sign(
+        //     {id: user.id},  
+        //     process.env.JWT_SECRET,
+        //     {expiresIn: "1h"}
+        // );
 
-       res.json({token});
+    //    res.json({token});
+        res.json({"id": user.id});
     }
 
     else
     {
+        console.log("wrong password");
         res.redirect('/login');
     }
 
@@ -67,12 +71,6 @@ route.post('/signup',async (req,res) => {
     console.log(await loginModel.createUser(req.body.username, req.body.password, req.body.email));
     
     res.redirect('/login');
-});
-
-// Get user info
-route.get("/user/info", (req, res) => {
-  // Pretend user is logged in (replace with DB data or session)
-  res.json({ username: "Custer", email: "test@example.com", idle_items: "5"});
 });
 
 

@@ -23,7 +23,7 @@ export function hashPassword(user_password)
 // Gets info about a row based on User ID
 export async function getRow(id)
 {
-    const [result] = await pool.query('SELECT * FROM user_info WHERE user_id=?',[id]);
+    const [result] = await pool.query('SELECT * FROM users WHERE id=?',[id]);
     return result[0];
 }
 
