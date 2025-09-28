@@ -164,50 +164,58 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ========== ADD/EDIT FORMS ==========
-  function getItemForm(existingItem = null) {
-    const categoryOptions = Object.keys(categories)
-      .map(c => `<option value="${c}">${c}</option>`).join("");
+function getItemForm(existingItem = null) {
+  const categoryOptions = Object.keys(categories)
+    .map(c => `<option value="${c}">${c}</option>`).join("");
 
-    let tagGroups = "";
-    for (let group in metadataTags) {
-      tagGroups += `
-        <h4>${group}</h4>
-        <div class="tag-selector">
-          ${metadataTags[group].map(tag => `<button type="button" class="tag-option">${tag}</button>`).join("")}
-        </div>
-      `;
-    }
-
-    return `
-      <h2>${existingItem ? "Edit Item" : "Add New Item"}</h2>
-      <form id="item-form">
-        <div class="form-group neu-input">
-          <input type="text" id="item-name" placeholder=" " value="${existingItem ? existingItem.name : ""}" required>
-          <label for="item-name">Item Name</label>
-        </div>
-
-        <div class="form-group neu-input">
-          <select id="category" required>
-            <option value="" disabled selected>Select Category</option>
-            ${categoryOptions}
-          </select>
-          <label for="category">Category</label>
-        </div>
-
-        <div class="form-group neu-input">
-          <select id="subcategory" required>
-            <option value="" disabled selected>Select Subcategory</option>
-          </select>
-          <label for="subcategory">Subcategory</label>
-        </div>
-
-        <h3>Tags</h3>
-        ${tagGroups}
-
-        <button type="submit" class="neu-button accent">${existingItem ? "Save Changes" : "Add Item"}</button>
-      </form>
+  let tagGroups = "";
+  for (let group in metadataTags) {
+    tagGroups += `
+      <h4>${group}</h4>
+      <div class="tag-selector">
+        ${metadataTags[group].map(tag => `<button type="button" class="tag-option">${tag}</button>`).join("")}
+      </div>
     `;
   }
+
+  return `
+    <h2>${existingItem ? "Edit Item" : "Add New Item"}</h2>
+    <form id="item-form" enctype="multipart/form-data">
+      <div class="form-group neu-input">
+        <input type="text" id="item-name" placeholder=" " value="${existingItem ? existingItem.name : ""}" required>
+        <label for="item-name">Item Name</label>
+      </div>
+
+      <div class="form-group neu-input">
+        <select id="category" required>
+          <option value="" disabled selected>Select Category</option>
+          ${categoryOptions}
+        </select>
+        <label for="category">Category</label>
+      </div>
+
+      <div class="form-group neu-input">
+        <select id="subcategory" required>
+          <option value="" disabled selected>Select Subcategory</option>
+        </select>
+        <label for="subcategory">Subcategory</label>
+      </div>
+
+      <h3>Tags</h3>
+      ${tagGroups}
+
+      <!-- NEW: Image Upload Section -->
+      <div class="form-group">
+        <label for="item-image">Upload Image</label>
+        <input type="file" id="item-image" accept="image/*" required>
+        <div id="image-preview" style="margin-top: 10px; max-width: 200px;">
+          <!-- Preview will appear here -->
+        </div>
+      </div>
+      <button type="submit" class="neu-button accent">${existingItem ? "Save Changes" : "Add Item"}</button>
+    </form>
+  `;
+}
 
   // Hook up Add/Edit buttons
   document.querySelectorAll(".actions .action-btn").forEach(btn => {
@@ -242,45 +250,56 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 // Handle form submit
+// Handle form submit with image upload
 document.addEventListener("submit", e => {
   if (e.target.id === "item-form") {
     e.preventDefault();
+    
+    const formData = new FormData();
+    const imageFile = document.getElementById("item-image").files[0];
     const name = document.getElementById("item-name").value;
     const category = document.getElementById("category").value;
     const subcategory = document.getElementById("subcategory").value;
     const tags = [...document.querySelectorAll(".tag-option.active")].map(t => t.textContent);
 
-    // Check if editing or adding
-    let targetItem;
-    if (e.target.dataset.editingId) {
-      targetItem = document.querySelector(`.closet-item[data-id="${e.target.dataset.editingId}"]`);
-    } else {
-      targetItem = document.createElement("div");
-      targetItem.classList.add("closet-item");
-      targetItem.dataset.id = Date.now(); // unique id
-      targetItem.innerHTML = `
-        <img src="../frontend/public/clothes/default.jpg" alt="${name}">
-        <div class="item-preview">
-          <h3 class="preview-name">${name}</h3>
-          <div class="tags"></div>
-        </div>
-      `;
-      document.querySelector(".closet-grid").appendChild(targetItem);
-    }
+    // Add all form data
+    formData.append('image', imageFile);
+    formData.append('name', name);
+    formData.append('category', category);
+    formData.append('subcategory', subcategory);
+    formData.append('tags', JSON.stringify(tags));
 
-    // Update dataset
-    targetItem.dataset.name = name;
-    targetItem.dataset.category = category;
-    targetItem.dataset.subcategory = subcategory;
-    targetItem.dataset.tags = JSON.stringify(tags);
-
-    // Update inline preview
-    targetItem.querySelector(".preview-name").textContent = name;
-    const tagContainer = targetItem.querySelector(".tags");
-    tagContainer.innerHTML = tags.map(tag => `<span class="tag">${tag}</span>`).join("");
-
-    alert("Item saved!");
-    modal.classList.remove("active");
+    // Send to your backend
+    fetch('/api/items', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Add the new item to your grid
+        const newItem = document.createElement("div");
+        newItem.classList.add("closet-item");
+        newItem.dataset.id = data.itemId;
+        newItem.innerHTML = `
+          <img src="${data.imagePath}" alt="${name}">
+          <div class="item-preview">
+            <h3 class="preview-name">${name}</h3>
+            <div class="tags">${tags.map(tag => `<span class="tag">${tag}</span>`).join("")}</div>
+          </div>
+        `;
+        document.querySelector(".closet-grid").appendChild(newItem);
+        
+        alert("Item added successfully!");
+        modal.classList.remove("active");
+      } else {
+        alert("Error adding item: " + data.message);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert("Error uploading item");
+    });
   }
 });
 
