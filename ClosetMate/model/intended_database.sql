@@ -46,6 +46,7 @@ CREATE TABLE plans (
 CREATE TABLE items (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT NOT NULL,
+    name VARCHAR(100),
     image_url VARCHAR(500),
     category VARCHAR(100),
     subcategory VARCHAR(100),

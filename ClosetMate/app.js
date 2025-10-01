@@ -13,6 +13,7 @@ const app = express();
 app.use('/css',  express.static(path.join(__dirname, 'view', 'frontend', 'public', 'css')));
 app.use('/js',   express.static(path.join(__dirname, 'view', 'frontend', 'public', 'js')));
 app.use('/media',  express.static(path.join(__dirname, 'view', 'frontend', 'public', 'media')));
+app.use('/userMedia', express.static(path.join(__dirname, 'userMedia')));
 
 console.log(__dirname);
 

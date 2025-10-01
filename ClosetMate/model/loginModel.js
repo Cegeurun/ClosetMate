@@ -20,21 +20,15 @@ export function hashPassword(user_password)
     return crypto.createHash('sha256').update(user_password).digest('hex');
 }
 
+
+// ======= Get Data =======
+
+
 // Gets info about a row based on User ID
 export async function getRow(id)
 {
     const [result] = await pool.query('SELECT * FROM users WHERE id=?',[id]);
     return result[0];
-}
-
-// Create Account
-export async function createUser(user_username, user_password, user_email)
-{
-    user_password = hashPassword(user_password);
-    const insertResult = await pool.query(`
-        INSERT INTO users(name, password_hash, email)
-        VALUES (?, ?, ?);`, [user_username, user_password, user_email]); // insertResult is just metadata
-   return insertResult; 
 }
 
 // Verify Account Credentials
@@ -96,6 +90,37 @@ export async function getUserData(username, password) {
     preferences,
     created_at: user.created_at
   };
+}
+
+// ======= Create Data =======
+
+
+
+// Create Account
+export async function createUser(user_username, user_password, user_email)
+{
+    user_password = hashPassword(user_password);
+    const insertResult = await pool.query(`
+        INSERT INTO users(name, password_hash, email)
+        VALUES (?, ?, ?);`, [user_username, user_password, user_email]); // insertResult is just metadata
+   return insertResult; 
+}
+
+// Create Item
+export async function createItem(userId, name, category, subcategory, tags, imageUrl)
+{
+    const tagsJson = JSON.stringify(tags);
+    const [result] = await pool.query(`
+      INSERT INTO items(user_id, name, category, subcategory, style_tags, image_url)
+      VALUES (?, ?, ?, ?, ?, ?)`, 
+      [userId, name, category, subcategory, tagsJson, imageUrl]);
+    
+    return result;
+}
+
+export async function getItemsByUserId(userId) {
+    const [rows] = await pool.query('SELECT * FROM items WHERE user_id = ?', [userId]);
+    return rows;
 }
 
 // const user_info = await getRow(1);
