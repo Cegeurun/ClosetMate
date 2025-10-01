@@ -1,2 +1,4 @@
 ClosetMate/node_modules/
 ClosetMate/.env
+ClosetMate/userMedia/*
+!ClosetMate/userMedia/.gitkeep

@@ -300,13 +300,13 @@ document.addEventListener("DOMContentLoaded", () => {
           <label for="item-name">Item Name</label>
         </div>
 
-        <div class="form-group neu-input">
-          <select id="category" required>
-            <option value="" disabled selected>Select Category</option>
-            ${categoryOptions}
-          </select>
-          <label for="category">Category</label>
-        </div>
+      <div class="form-group neu-input">
+        <select id="category" required>
+          <option value="" disabled selected>Select Category</option>
+          ${categoryOptions}
+        </select>
+        <label for="category">Category</label>
+      </div>
 
         <div class="form-group neu-input">
           <select id="subcategory" required>
@@ -327,10 +327,18 @@ document.addEventListener("DOMContentLoaded", () => {
         <h3>Tags</h3>
         ${tagGroups}
 
-        <button type="submit" class="neu-button accent">${existingItem ? "Save Changes" : "Add Item"}</button>
-      </form>
-    `;
-  }
+      <!-- NEW: Image Upload Section -->
+      <div class="form-group">
+        <label for="item-image">Upload Image</label>
+        <input type="file" id="item-image" accept="image/*" required>
+        <div id="image-preview" style="margin-top: 10px; max-width: 200px;">
+          <!-- Preview will appear here -->
+        </div>
+      </div>
+      <button type="submit" class="neu-button accent">${existingItem ? "Save Changes" : "Add Item"}</button>
+    </form>
+  `;
+}
 
   // ==========================================================================
   // ACTION BUTTON HANDLERS
