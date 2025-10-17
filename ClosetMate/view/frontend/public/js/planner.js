@@ -16,61 +16,80 @@ document.addEventListener("DOMContentLoaded", () => {
   const viewSwitch = document.querySelector(".view-switch");
   const actions = document.querySelector(".actions");
 
-  let plannedOutfits = []; // { id, date, time, categories: [{label, imgSrc}], html }
-
-  /* -----------------------
-     Mock closet (categories -> subcategories -> images)
-     Replace with your DB results in real app
-     ----------------------- */
-  const closetDB = {
-    Top: {
-      "Blouses": ["top 1.jpg", "top 2.jpg"],
-      "Tees": ["top 3.jpg"]
-    },
-    Bottom: {
-      "Jeans": ["bottom 1.jpg", "bottom 2.jpg"],
-      "Skirts": ["bottom 3.jpg"]
-    },
-    Shoes: {
-      "Sneakers": ["shoes 1.jpg", "shoes 2.jpg"],
-      "Heels": ["shoes 3.jpg"]
-    },
-    Jacket: {
-      "Light Jacket": ["outerwear 1.jpg"],
-      "Coat": ["outerwear 2.jpg"]
-    },
-    Accessories: {
-      "Hat": ["acc 1.jpg"],
-      "Scarf": ["acc 2.jpg"]
-    }
-  };
-
-  // Flattened quick-access arrays per "category key" used by builder indices
+  const closetDB = {}; // Will be populated from DB
   const closetArrays = {}; // e.g. { top_blouses: [...], bottom_jeans: [...] }
-  Object.keys(closetDB).forEach(category => {
-    Object.keys(closetDB[category]).forEach(sub => {
-      const key = `${category.toLowerCase()}_${slug(sub)}`;
-      closetArrays[key] = closetDB[category][sub].slice();
-    });
-  });
-
-  // default builder categories (top, bottom, shoes) map to first subcategory existing
-  function defaultKeyFor(categoryName) {
-    const cat = Object.keys(closetDB).find(c => c.toLowerCase() === categoryName);
-    if (!cat) return null;
-    const firstSub = Object.keys(closetDB[cat])[0];
-    return `${cat.toLowerCase()}_${slug(firstSub)}`;
-  }
-
   const indices = {}; // dynamic per builder slot key e.g. { top_blouses: 0 }
+
+  // Fetch items and initialize the planner
+  async function initializePlanner() {
+    const userId = localStorage.getItem('userId'); // Assumes userId is in localStorage
+    if (!userId) {
+      console.error("No user ID found. Cannot fetch items.");
+      // Maybe redirect to login or show an error message
+      return;
+    }
+
+    try {
+      const response = await fetch(`/user/${userId}/items`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const items = await response.json();
+      
+      // Process items into the closetDB structure
+      items.forEach(item => {
+        if (!item.category || !item.subcategory || !item.image_url) return;
+
+        if (!closetDB[item.category]) {
+          closetDB[item.category] = {};
+        }
+        if (!closetDB[item.category][item.subcategory]) {
+          closetDB[item.category][item.subcategory] = [];
+        }
+        closetDB[item.category][item.subcategory].push(item);
+      });
+
+      // Flatten into quick-access arrays (using the new structure)
+      Object.keys(closetDB).forEach(category => {
+        Object.keys(closetDB[category]).forEach(sub => {
+          const key = `${slug(category)}_${slug(sub)}`;
+          closetArrays[key] = closetDB[category][sub].map(item => item.image_url);
+        });
+      });
+
+      // Now that data is loaded, initialize the builder
+      // This is the correct and only place this should be called.
+      initBuilderSlots();
+
+    } catch (error) {
+      console.error("Failed to fetch or process closet items:", error);
+    }
+  }
+  
+  // Call the initialization function when the page loads
+  initializePlanner();
+
 
   // helpers
   function slug(s) { return s.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9\-]/g, ""); }
   function wrapPhoto(src, alt = "") {
-    return `<div class="outfit-photo"><img src="/media/clothes/${src}" alt="${alt}"></div>`;
+    // The src from the DB already includes the full path
+    return `<div class="outfit-photo"><img src="${src}" alt="${alt}"></div>`;
   }
   function uuid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,8); }
 
+    /**
+   * Finds the first available key in closetArrays that starts with the given label.
+   * e.g., for "top", it might return "tops_t-shirts".
+   * @param {string} label - The general category label (e.g., "top", "bottom").
+   * @returns {string|null} The matching key or null if not found.
+   */
+  function defaultKeyFor(label) {
+    // Find the first key in our flattened closet arrays that starts with the label.
+    // For example, if label is "top", it will match "tops_shirts", "tops_blouses", etc.
+    return Object.keys(closetArrays).find(key => key.startsWith(slug(label))) || null;
+  }
+  
   /* -----------------------
      Chat + AI suggestions
      ----------------------- */
@@ -160,41 +179,48 @@ document.addEventListener("DOMContentLoaded", () => {
      ----------------------- */
   // builder initial slots are inside manualBuilder as .builder-row elements with .builder-slot and data-label
   function initBuilderSlots() {
-    const rows = manualBuilder.querySelectorAll(".builder-row");
-    rows.forEach(row => {
+    const builderRows = manualBuilder.querySelectorAll(".builder-row");
+
+    builderRows.forEach(row => {
       const slot = row.querySelector(".builder-slot");
-      const labelAttr = slot.dataset.label; // e.g. "top"
-      // find a default key to drive images
-      const defaultKey = defaultKeyFor(labelAttr) || Object.keys(closetArrays)[0];
-      const indexKey = defaultKey;
-      if (!(indexKey in indices)) indices[indexKey] = 0;
+      const label = slot.dataset.label; // e.g., "top", "bottom"
 
-      // save mapping on the slot so nav works even if new categories added
-      slot.dataset.key = indexKey;
+      // Find the first available subcategory key for this label (e.g., "tops_t-shirts")
+      const key = defaultKeyFor(label);
 
-      // set first image if available
-      const arr = closetArrays[indexKey] || [];
-      if (arr.length) {
-        slot.innerHTML = wrapPhoto(arr[0], labelAttr);
-      } else {
-        slot.innerHTML = `<span style="font-size:.85rem;color:var(--text-muted)">${labelAttr}</span>`;
-      }
+      // If we found a key and it has images, set it up
+      if (key && closetArrays[key]?.length > 0) {
+        // Store the specific key (e.g., "tops_t-shirts") on the slot for later use
+        slot.dataset.key = key;
+        // Initialize the index for this key
+        indices[key] = 0;
+        // Display the first image
+        slot.innerHTML = wrapPhoto(closetArrays[key][0]);
 
-      // attach row click handlers for nav buttons
-      row.querySelectorAll(".nav-btn").forEach(btn => {
-        btn.addEventListener("click", ev => {
-          ev.stopPropagation();
-          const dir = btn.textContent === "<" ? -1 : 1;
-          const key = slot.dataset.key;
-          if (!key || !closetArrays[key]) return;
-          indices[key] = (indices[key] + dir + closetArrays[key].length) % closetArrays[key].length;
-          slot.innerHTML = wrapPhoto(closetArrays[key][indices[key]]);
+        // Add event listeners to the navigation buttons in this row
+        row.querySelectorAll(".nav-btn").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const isNext = btn.textContent === ">";
+            const currentKey = slot.dataset.key;
+            const items = closetArrays[currentKey];
+            let currentIndex = indices[currentKey];
+
+            // Calculate the next index, wrapping around if necessary
+            if (isNext) {
+              currentIndex = (currentIndex + 1) % items.length;
+            } else {
+              currentIndex = (currentIndex - 1 + items.length) % items.length;
+            }
+
+            // Update the index and the displayed image
+            indices[currentKey] = currentIndex;
+            slot.innerHTML = wrapPhoto(items[currentIndex]);
+          });
         });
-      });
+      }
     });
   }
 
-  initBuilderSlots();
 
   /* -----------------------
      Add / Delete Category (modal with dropdowns)
